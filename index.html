@@ -13,8 +13,12 @@
         <input type="text" id="text-input" class="w-full p-2 mb-4 border rounded" placeholder="Enter text to generate QR code">
         <button id="generate-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generate QR Code</button>
         <canvas id="qr-code" class="mt-4"></canvas>
+        <div id="download-buttons" class="mt-4 hidden">
+            <button id="download-svg" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download SVG</button>
+            <button id="download-png" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Download PNG</button>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

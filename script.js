@@ -1,24 +1,63 @@
 document.getElementById('generate-btn').addEventListener('click', () => {
     const text = document.getElementById('text-input').value;
     const canvas = document.getElementById('qr-code');
+    const downloadButtons = document.getElementById('download-buttons');
+
     if (text) {
         QRCode.toCanvas(canvas, text, function (error) {
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                return;
+            }
             console.log('QR code generated!');
+            downloadButtons.classList.remove('hidden'); // Show download buttons
         });
     }
 });
 
-// Add QRCode library
-const script = document.createElement('script');
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
-document.body.appendChild(script);
+// Download QR Code as SVG
+document.getElementById('download-svg').addEventListener('click', () => {
+    const text = document.getElementById('text-input').value;
+    if (text) {
+        QRCode.toString(text, { type: 'svg' }, function (error, svg) {
+            if (error) {
+                console.error(error);
+                return;
+            }
+            const blob = new Blob([svg], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'qrcode.svg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    }
+});
 
-// Register the Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => console.log('Service Worker registered:', registration))
-            .catch(error => console.log('Service Worker registration failed:', error));
-    });
-}
+// Download QR Code as PNG
+document.getElementById('download-png').addEventListener('click', () => {
+    const text = document.getElementById('text-input').value;
+    const canvas = document.getElementById('qr-code');
+
+    if (text) {
+        QRCode.toCanvas(canvas, text, function (error) {
+            if (error) {
+                console.error(error);
+                return;
+            }
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'qrcode.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 'image/png');
+        });
+    }
+});
