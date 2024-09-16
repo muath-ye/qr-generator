@@ -1,10 +1,11 @@
 {
     "name": "QR Code Generator",
-    "short_name": "QRGen",
-    "start_url": "/",
+    "short_name": "QR Code",
+    "description": "Generate QR codes instantly with our free and easy-to-use QR code generator.",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "theme_color": "#ffc517",
     "icons": [
         {
             "src": "icon-192x192.png",

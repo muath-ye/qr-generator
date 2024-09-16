@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://qr-generator.muathye.com">
     <meta property="og:image" content="https://qr-generator.muathye.com/icon-512x512.png">
     <title>QR Code Generator - Free QR Code Generator Online</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="tailwind.min.css" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <script type="application/ld+json">
         {
@@ -75,6 +75,18 @@
     </div>
     <script src="qrcode.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+    
 </body>
 
 </html>
