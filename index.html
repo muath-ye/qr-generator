@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator PWA</title>
+    <title>QR Code Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
+    <style>
+        /* Additional custom styles */
+        .btn-primary {
+            @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+        }
+        .btn-secondary {
+            @apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded;
+        }
+        .btn-tertiary {
+            @apply bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded;
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center h-screen bg-gray-100">
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-4">QR Code Generator</h1>
-        <input type="text" id="text-input" class="w-full p-2 mb-4 border rounded" placeholder="Enter text to generate QR code">
-        <button id="generate-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generate QR Code</button>
-        <canvas id="qr-code" class="mt-4"></canvas>
-        <div id="download-buttons" class="mt-4 hidden">
-            <button id="download-svg" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download SVG</button>
-            <button id="download-png" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Download PNG</button>
+<body class="flex items-center justify-center min-h-screen bg-gray-50 p-4">
+    <div class="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">QR Code Generator</h1>
+        <p class="text-center text-sm text-gray-500 mt-2 mb-6">
+            Powered by <a href="https://muathye.com" target="_blank" class="text-blue-500 hover:underline">muathye.com</a>
+        </p>
+        <input type="text" id="text-input" class="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter text to generate QR code">
+        <button id="generate-btn" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-full mb-4">Generate QR Code</button>
+        <div id="qr-container" class="flex justify-center mb-4">
+            <canvas id="qr-code" class="mt-4"></canvas>
+        </div>
+        <div id="download-buttons" class="grid grid-cols-2 gap-4 hidden">
+            <button id="download-svg" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"></path></svg>
+                <span class="px-1">SVG</span> Download
+            </button>
+            <button id="download-png" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"></path></svg>
+                <span class="px-1">PNG</span> Download
+            </button>
         </div>
     </div>
     <script src="qrcode.min.js"></script>
